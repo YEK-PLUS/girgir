@@ -1,0 +1,30 @@
+{
+  "name": "girgir",
+  "version": "1.0.0",
+  "description": "Express Server Rest Api Input Type Controller",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YEK-PLUS/girgir.git"
+  },
+  "keywords": [
+    "express",
+    "expressjs",
+    "input",
+    "validate"
+  ],
+  "author": "YEK-PLUS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YEK-PLUS/girgir/issues"
+  },
+  "homepage": "https://github.com/YEK-PLUS/girgir#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.1"
+  }
+}
