@@ -1,7 +1,6 @@
 const config = require('./config');
 const handler = require('./handler');
 const regex = require('./routes');
-// const { regex } = require('./utils');
 
 const defaultOptions = {
   errorMessage: 'wrong inputs',

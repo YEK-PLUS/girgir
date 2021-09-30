@@ -6,7 +6,7 @@ const handler = (routeRegex, config, { originalUrl, body }) => {
 
   const route = routeRegex(parsedPath);
   if (!route) return 'path unresolved';
-  
+
   const part = getObj(config, route.split('/'));
   const params = paramsFilterFromUrl(route, parsedPath);
 
