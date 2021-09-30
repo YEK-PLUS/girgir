@@ -8,24 +8,28 @@ const lengthChecker = (value, min, max) => {
   if (typeof value === 'number') return (min ? value >= min : true) && (max ? value <= max : true);
   return false;
 };
-const checker = (fields, reqs) => {
-  const requirements = Object.entries(reqs).filter(
-    ([key]) => key !== 'isPoint',
-  );
-  return (
-    !requirements
-      .map(([key, req]) => {
-        const value = fields[key];
-        const typeCheck = typeChecker(value, req.type);
-        const lengthCheck = lengthChecker(
-          value,
-          req.type === 'string' ? req.minLen : req.min,
-          req.type === 'string' ? req.maxLen : req.max,
-        );
-        return !(typeCheck && lengthCheck);
-      })
-      .find((e) => e)
-  );
-};
 
-module.exports = checker;
+const allTrueArr = (arr) => arr.filter((e) => e).length === arr.length;
+
+const checkLoop = (body, part) => Object.entries(part).map(([key, value]) => {
+  let isValid = false;
+  const param = body[key];
+
+  if (key === 'isObject' || key === 'isPoint') isValid = true;
+  else if (!param) isValid = false;
+  else if (value.isDisabled) isValid = true;
+  else if (value.isObject) isValid = allTrueArr(checkLoop(param, value));
+  else if (value.isPoint) isValid = true;
+  else {
+    const typeCheck = typeChecker(param, value.type);
+    const lengthCheck = lengthChecker(
+      param,
+      value.type === 'string' ? value.minLen : value.min,
+      value.type === 'string' ? value.maxLen : value.max,
+    );
+    isValid = typeCheck && lengthCheck;
+  }
+  return isValid;
+});
+
+module.exports = (body, part) => allTrueArr(checkLoop(body, part));
