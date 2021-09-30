@@ -56,6 +56,53 @@ const routes = {
 };
 ```
 
+#### Deep Checking
+
+If `isObject` is used, girgir will check deep params.
+
+```js
+const routes = {
+  adres: {
+    isObject: true,
+    il: {
+      isObject: true,
+      slug: { type: "string" },
+    },
+    ilce: {
+      isObject: true,
+      slug: { type: "string" },
+    },
+    mahalle: {
+      isObject: true,
+      slug: { type: "string" },
+    },
+  },
+};
+```
+#### Disable Deep Check Or Route
+
+If `isDisabled` is used, girgir will ignore results for these section.
+
+```js
+const routes = {
+  adres: {
+    isObject: true,
+    il: {
+      isObject: true,
+      slug: { type: "string" },
+    },
+    ilce: {
+      isObject: true,
+      slug: { type: "string" },
+    },
+    mahalle: {
+      isDisabled: true,
+      slug: { type: "string" },
+    },
+  },
+};
+```
+
 ### Config
 
 Girgir using `.girgirrc.js` from project root path
