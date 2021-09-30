@@ -1,14 +1,15 @@
-const { get, paramsFilterFromUrl } = require('./utils');
+const { getObj, paramsFilterFromUrl, urlFormat } = require('./utils');
 const checker = require('./checker');
 
-const handler = (options, config) => ({ originalUrl, body }) => {
-  const parsedPath = `/${originalUrl
-    .split('/')
-    .filter((e) => e !== '')
-    .join('/')}/`;
-  const { part, route } = get(options, parsedPath, config);
-  if (!part) return 'path unresolved';
+const handler = (routeRegex, config, { originalUrl, body }) => {
+  const parsedPath = urlFormat(originalUrl);
+
+  const route = routeRegex(parsedPath);
+  if (!route) return 'path unresolved';
+  
+  const part = getObj(config, route.split('/'));
   const params = paramsFilterFromUrl(route, parsedPath);
+
   const check = checker({ ...body, ...params }, part);
   if (!check) return 'wrong fields';
   return true;

@@ -1,6 +1,7 @@
 const config = require('./config');
-const handlerCreator = require('./handler');
-const { createRoutes, regex } = require('./utils');
+const handler = require('./handler');
+const regex = require('./routes');
+// const { regex } = require('./utils');
 
 const defaultOptions = {
   errorMessage: 'wrong inputs',
@@ -10,11 +11,10 @@ const main = (_options) => {
   const options = {
     errorMessage: _options.errorMessage || defaultOptions.errorMessage,
   };
-  const routes = createRoutes(config);
-  const routeRegex = regex(routes);
-  const handler = handlerCreator(routeRegex, config);
+  const routeRegex = regex(config);
+
   return async (req, res, next) => {
-    const result = await handler(req);
+    const result = await handler(routeRegex, config, req);
 
     // TODO: special error messages for different inputs
     if (!result) return res.status(401).json({ error: options.errorMessage });
