@@ -14,11 +14,7 @@ const regex = (config) => {
         .join('/')}$`,
     ),
   );
-  return (string) => list[
-    rList
-      .map((r, i) => (r.test(string) ? i : -1))
-      .find((e) => e >= 0)
-  ];
+  return (string) => list[rList.map((r, i) => (r.test(string) ? i : -1)).find((e) => e >= 0)];
 };
 module.exports.routes = routes;
 module.exports.regex = regex;
