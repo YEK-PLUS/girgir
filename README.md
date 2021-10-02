@@ -79,6 +79,41 @@ const routes = {
   },
 };
 ```
+
+#### Collection Checking
+
+If `isCollection` is used, girgir will check object list (a.k.a collection).
+
+```js
+const routes = {
+  adres: {
+    isObject: true,
+     names:{
+      isCollection:true,
+      slug:{
+        type:'string'
+      }
+    },
+  },
+};
+```
+
+#### Array Checking
+
+If `isArray` is used, girgir will check array.
+
+```js
+const routes = {
+  adres: {
+    isObject: true,
+    arr:{
+      isArray:true,
+      type:"string"
+    },
+  },
+};
+```
+
 #### Disable Deep Check Or Route
 
 If `isDisabled` is used, girgir will ignore results for these section.

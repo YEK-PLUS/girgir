@@ -16,11 +16,23 @@ module.exports = {
           },
           adres: {
             isObject: true,
+            names:{
+              isCollection:true,
+              slug:{
+                type:'string'
+              }
+            },
+            arr:{
+              isArray:true,
+              type:"string"
+            },
             il: {
+              isDisabled: true,
               isObject: true,
               slug: { type: "string" },
             },
             ilce: {
+              isDisabled: true,
               isObject: true,
               slug: { type: "string" },
             },
