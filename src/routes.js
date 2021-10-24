@@ -10,7 +10,7 @@ const regex = (config) => {
     (string) => new RegExp(
       `^${string
         .split('/')
-        .map((s) => s.replace(/(?::.*)/gm, '[a-zA-z0-9]*'))
+        .map((s) => s.replace(/(?::.*)/gm, '.*'))
         .join('/')}$`,
     ),
   );
